@@ -4,8 +4,7 @@ import streamlit
 
 import pandas
 
-import urllib.error 
-import URLError
+from  urllib.error import URLError
 
 
 
@@ -42,6 +41,7 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # write your own comment - what does this do?
 streamlit.dataframe(fruityvice_normalized)
 
+streamlit.stop()
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from  PC_RIVERY_DB.PUBLIC.fruit_load_list")
@@ -52,7 +52,7 @@ streamlit.dataframe(my_data_rows)
 
 my_cur.execute("insert into PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST values ('from streamlit')")
 
-streamlit.stop()
+
 
 
 
